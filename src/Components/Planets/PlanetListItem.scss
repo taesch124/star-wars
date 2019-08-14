@@ -1,0 +1,14 @@
+@import './../../Styles/Variables.scss';
+
+.list-item {
+    cursor: pointer;
+    padding: 3rem;
+    background-color: $primary-color;
+    color: whitesmoke;
+    width: 100%;
+}
+
+.selected {
+    background-color: $selected-color;
+    color: $text-secondary;
+}

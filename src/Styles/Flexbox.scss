@@ -1,0 +1,14 @@
+.flex-row-nowrap {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.flex-row-wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-column-nowrap {
+    display: flex;
+    flex-flow:  column nowrap;
+}

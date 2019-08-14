@@ -1,0 +1,32 @@
+.master-detail-container {
+    display: flex;
+    flex-flow: row wrap;
+    overflow-y: hidden;
+}
+
+#master-container {
+    height: 100vh;
+    overflow: auto;
+    width: 36%;
+    border-right: 1px solid white;
+}
+
+#detail-container {
+    height: 100vh;
+    flex: 1 0 auto;
+}
+
+.message-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+    p {
+        font-size: 2rem;
+        color: white;
+    }
+}
+

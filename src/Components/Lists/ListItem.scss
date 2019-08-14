@@ -1,0 +1,21 @@
+@import './../../Styles/Variables.scss';
+
+.list-item {
+    cursor: pointer;
+    padding: 3rem;
+    background-color: $primary-color;
+    color: whitesmoke;
+    border-bottom: 1px solid white;
+
+    &:hover {
+        background-color: $secondary-color-dark;
+        color: $primary-color;
+    }
+
+    
+}
+
+.selected {
+    background-color: $selected-color;
+    color: $text-secondary;
+}
