@@ -4,6 +4,7 @@ import './PeoplePanel.scss';
 
 function PeoplePanel (props) {
     let person = props.item;
+    console.log(person, person['image'], person.name, props.item);
     return (
         <div className='panel planet-panel' id='selected-item'>
             
@@ -13,6 +14,10 @@ function PeoplePanel (props) {
                     <button onClick={props.toggleDetails}>Flip</button>
                 </div>
                 <div className="front-content">
+                    {person.image ?
+                    <img src={process.env.PUBLIC_URL + '/assets/images/species/' + formatSpeciesName(person.image) + '.jpg'} alt="Species portrait" /> :
+                    null
+                    }
                     <h3 className="planet-name-front">{person.name}</h3>
                 </div>
             </div>
@@ -33,6 +38,13 @@ function PeoplePanel (props) {
             </div>
         </div>
     )
+}
+    
+
+function formatSpeciesName(original) {
+    let species = original.replace(/'s|'| |species/g, '');
+    console.log(species);
+    return species;
 }
 
 export default PeoplePanel;

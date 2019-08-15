@@ -51,18 +51,23 @@ class MasterDetailContainer extends Component {
         )
     }
 
-    selectItem = (e, itemUrl) => {
+    selectItem = async (e, itemUrl) => {
         let currentPanel = document.getElementById('selected-item');
+        if(currentPanel && currentPanel.classList.contains('flip')) this.toggleDetails();
         this.clearSelected();
         e.currentTarget.classList.add('selected');
         axios.get(itemUrl)
-        .then(response => {
-            
-            if(currentPanel && currentPanel.classList.contains('flip')) this.toggleDetails();
+        .then(async response => {
+            let person = response.data;
+            console.log(person);
+            if(this.props.customPostLoad) {
+                const species = await this.props.customPostLoad(person);
+                console.log(species);
+            }
             this.setState({
-                selectedItem: response.data,
+                selectedItem: person,
                 lastScrollPosition: window.scrollY
-            })
+            });
         })
         .catch(error => {
             console.error(error);

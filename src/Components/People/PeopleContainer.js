@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 //Mpdels
 import MasterDetailContainer from './../MasterDetail/MasterDetailContainer';
@@ -14,8 +15,23 @@ function PeopleContainer(props) {
             startingUrl="https://swapi.co/api/people"
             panelComponent={PeoplePanel}
             listItemComponent={SimpleListItem}
+            customPostLoad={populateSpecies}
         />
     )
+}
+
+async function populateSpecies(person) {
+    if(person.species.length > 0) {
+        axios.get(person.species[0])
+        .then(response => {
+            person.image = response.data.name;
+            return response.data.name;
+        })
+        .catch(error => {
+            console.error(error);
+            return null;
+        });
+    } else return null;
 }
 
 export default PeopleContainer;
