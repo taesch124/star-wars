@@ -16,15 +16,28 @@ class MasterDetailContainer extends Component {
         this.state = {
             selectedItemUrl: '',
             selectedItem: null,
-            lastScrollPosition: -1
+            lastScrollPosition: -1,
+            isMobile: false
         }
+    }
+
+    componentDidMount() {
+        this.isMobile();
+
+        window.addEventListener('resize', this.isMobile, false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.isMobile);
     }
 
     render() {
         const PanelComponent = this.props.panelComponent;
+        console.log('mobile: ' + this.state.isMobile);
+        console.log(this.state.isMobile && this.state.selectedItem);
         return (
             <div className="master-detail-container">
-                <div id="master-container">
+                <div id="master-container" className={this.state.isMobile && this.state.selectedItem ? 'hidden' : ''}>
                 <InfiniteList
                     startingUrl={this.props.startingUrl}
                     selectedItem={this.state.selectedItem}
@@ -33,7 +46,7 @@ class MasterDetailContainer extends Component {
                     listLoaded={this.setScrollPosition}
                 />
                 </div>
-                <div id="detail-container">
+                <div id="detail-container" className={this.state.isMobile && !this.state.selectedItem ? 'hidden' : ''}>
                     {this.state.selectedItem ?
                     <PanelComponent 
                         item={this.state.selectedItem}
@@ -55,7 +68,7 @@ class MasterDetailContainer extends Component {
         let currentPanel = document.getElementById('selected-item');
         if(currentPanel && currentPanel.classList.contains('flip')) this.toggleDetails();
         this.clearSelected();
-        e.currentTarget.classList.add('selected');
+        if(!this.state.isMobile) e.currentTarget.classList.add('selected');
         axios.get(itemUrl)
         .then(async response => {
             let person = response.data;
@@ -81,7 +94,6 @@ class MasterDetailContainer extends Component {
     }
 
     deselectItem = () => {
-        console.log(this.state.lastScrollPosition)
         this.setState({
             selectedItem: null,
         });
@@ -106,6 +118,16 @@ class MasterDetailContainer extends Component {
             if(item.classList.contains('selected')) item.classList.remove('selected');
         }
 
+    }
+
+    isMobile = () => {
+        let mobile = window.innerWidth < 980;
+
+        if(this.state.isMobile !== mobile) {
+            this.setState({
+                isMobile: mobile
+            })
+        }
     }
 }
 
