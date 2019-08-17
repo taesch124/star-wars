@@ -31,13 +31,18 @@
 
 @media screen and (max-width: 980px) {
     #master-container {
-        
         width: 100%;
     }
-    
+
     #master-container,
     #detail-container {
         height: 90vh;
+
+        @supports (-webkit-appearance: none) {
+            .os-android & {
+              height: calc(90vh - 56px);
+            }
+          }
     }
 
 }

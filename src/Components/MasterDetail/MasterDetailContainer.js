@@ -33,8 +33,6 @@ class MasterDetailContainer extends Component {
 
     render() {
         const PanelComponent = this.props.panelComponent;
-        console.log('mobile: ' + this.state.isMobile);
-        console.log(this.state.isMobile && this.state.selectedItem);
         return (
             <div className="master-detail-container">
                 <div id="master-container" className={this.state.isMobile && this.state.selectedItem ? 'hidden' : ''}>

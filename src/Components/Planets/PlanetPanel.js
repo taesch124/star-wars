@@ -74,7 +74,6 @@ function getPrimaryTerrain(terrains) {
     let classString = '';
 
     terrains.split(/, | /).some(terrain => {
-        console.log(terrain, terrainList[terrain]);
         if(terrainList[terrain]) {
             classString = terrainList[terrain];
             return true;

@@ -52,7 +52,6 @@ class InfiniteList extends Component {
         axios.get(url)
         .then(response => {
             let newList = [...this.state.itemList, ...response.data.results];
-            console.log(newList);
             this.setState({
                 itemList: newList,
                 nextItemsUrl: response.data.next,
@@ -78,7 +77,7 @@ class InfiniteList extends Component {
     }
 
     isBottom(el) {
-        return el.getBoundingClientRect().bottom <= window.innerHeight;
+        return el.getBoundingClientRect().bottom <= window.innerHeight + 2;
     }
 }
 

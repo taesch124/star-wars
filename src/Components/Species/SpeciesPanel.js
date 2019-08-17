@@ -44,7 +44,6 @@ function SpeciesPanel (props) {
 
 function formatSpeciesName(original) {
     let species = original.replace(/'s|'| |species/g, '');
-    console.log(species);
     return species;
 }
 
