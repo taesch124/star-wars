@@ -21,17 +21,20 @@ function PeopleContainer(props) {
 }
 
 async function populateSpecies(person) {
-    if(person.species.length > 0) {
-        axios.get(person.species[0])
-        .then(response => {
-            person.image = response.data.name;
-            return response.data.name;
-        })
-        .catch(error => {
-            console.error(error);
-            return null;
-        });
-    } else return null;
+    return new Promise((res, rej) => {
+        if(person.species.length > 0) {
+            axios.get(person.species[0])
+            .then(response => {
+                person.image = response.data.name;
+                return res(response.data.name);
+            })
+            .catch(error => {
+                console.error(error);
+                return rej(error);
+            });
+        } else return res(null);
+    })
+    
 }
 
 export default PeopleContainer;

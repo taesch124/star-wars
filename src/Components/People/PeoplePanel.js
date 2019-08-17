@@ -4,7 +4,8 @@ import './PeoplePanel.scss';
 
 function PeoplePanel (props) {
     let person = props.item;
-    console.log(person, person['image'], person.name, props.item);
+    console.log(person, person.image, person.name, props.item);
+    console.log(process.env.PUBLIC_URL + '/assets/images/species/' + formatSpeciesName(person.image) + '.jpg');
     return (
         <div className='panel planet-panel' id='selected-item'>
             
@@ -42,7 +43,7 @@ function PeoplePanel (props) {
     
 
 function formatSpeciesName(original) {
-    let species = original.replace(/'s|'| |species/g, '');
+    let species = original.replace(/'s|'| |species/g, '').toLowerCase();
     return species;
 }
 
